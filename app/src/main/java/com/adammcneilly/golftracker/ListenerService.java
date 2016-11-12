@@ -25,7 +25,8 @@ public class ListenerService extends WearableListenerService {
             new NotificationCompat.Builder(this)
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("Game completed!")
-                    .setContentText("Your score was: " + game.getScore() + " strokes.");
+                    .setContentText("Your score was: " + game.getScore() + " strokes.")
+                    .setLocalOnly(true);
 
             // Sets an ID for the notification
             int mNotificationId = 1;
