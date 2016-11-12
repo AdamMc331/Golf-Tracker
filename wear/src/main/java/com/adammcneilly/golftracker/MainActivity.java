@@ -1,6 +1,7 @@
 package com.adammcneilly.golftracker;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.GridViewPager;
 import android.util.Log;
@@ -42,7 +43,7 @@ public class MainActivity extends WearableActivity implements HoleAdapter.OnGame
                 })
                 .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
-                    public void onConnectionFailed(ConnectionResult result) {
+                    public void onConnectionFailed(@NonNull ConnectionResult result) {
                         Log.d(LOG_TAG, "onConnectionFailed: " + result);
                     }
                 })
@@ -79,7 +80,7 @@ public class MainActivity extends WearableActivity implements HoleAdapter.OnGame
         Wearable.NodeApi.getConnectedNodes(googleApiClient)
                 .setResultCallback(new ResultCallback<NodeApi.GetConnectedNodesResult>() {
                     @Override
-                    public void onResult(NodeApi.GetConnectedNodesResult nodes) {
+                    public void onResult(@NonNull NodeApi.GetConnectedNodesResult nodes) {
                         for (Node node : nodes.getNodes()) {
                             Log.v(LOG_TAG, "Sending:  " + node.getId());
                             Wearable.MessageApi.sendMessage(
@@ -87,7 +88,7 @@ public class MainActivity extends WearableActivity implements HoleAdapter.OnGame
 
                                     new ResultCallback<MessageApi.SendMessageResult>() {
                                         @Override
-                                        public void onResult(MessageApi.SendMessageResult sendMessageResult) {
+                                        public void onResult(@NonNull MessageApi.SendMessageResult sendMessageResult) {
                                             if (!sendMessageResult.getStatus().isSuccess()) {
                                                 Log.e(LOG_TAG, "Failed to send message with status code: "
                                                         + sendMessageResult.getStatus().getStatusCode());

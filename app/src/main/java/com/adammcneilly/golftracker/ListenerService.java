@@ -2,10 +2,8 @@ package com.adammcneilly.golftracker;
 
 import android.app.NotificationManager;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.adammcneilly.golftracker.utility.models.Game;
-import com.google.android.gms.games.internal.game.GameInstanceRef;
 import com.google.android.gms.wearable.MessageEvent;
 import com.google.android.gms.wearable.WearableListenerService;
 import com.google.gson.Gson;
@@ -16,7 +14,6 @@ import com.google.gson.Gson;
  * Created by adam.mcneilly on 11/12/16.
  */
 public class ListenerService extends WearableListenerService {
-    private static final String LOG_TAG = ListenerService.class.getSimpleName();
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
