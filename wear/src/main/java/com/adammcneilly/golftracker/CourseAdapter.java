@@ -63,7 +63,8 @@ public class CourseAdapter extends WearableRecyclerView.Adapter<CourseAdapter.Co
         @Override
         public void onClick(View view) {
             Intent gameActivity = new Intent(context, GameActivity.class);
-            gameActivity.putExtra(GameActivity.ARG_COURSE, courses.get(getAdapterPosition()));
+            Course course = courses.get(getAdapterPosition());
+            gameActivity.putExtra(GameActivity.ARG_COURSE, course);
             context.startActivity(gameActivity);
         }
     }

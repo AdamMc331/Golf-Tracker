@@ -52,6 +52,10 @@ public class Game implements Parcelable {
         this.holes = gameHoles;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
     public List<Hole> getHoles() {
         return holes;
     }
@@ -67,15 +71,11 @@ public class Game implements Parcelable {
     public int getScore() {
         int score = 0;
 
-        for(Hole hole : holes) {
+        for(Hole hole : course.getHoles()) {
             score += hole.getScore();
         }
 
         return score;
-    }
-
-    public static Game getPar3Game() {
-        return new Game(Hole.getTestHoles(3, 3));
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Game implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeParcelable(course, 0);
+        parcel.writeParcelable(course, i);
         parcel.writeList(holes);
     }
 }

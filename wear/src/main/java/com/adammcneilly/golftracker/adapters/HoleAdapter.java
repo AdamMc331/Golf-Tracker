@@ -26,8 +26,8 @@ public class HoleAdapter extends FragmentGridPagerAdapter implements SubmitFragm
 
     @Override
     public Fragment getFragment(int row, int col) {
-        if(col < game.getHoles().size()) {
-            return HoleFragment.newInstance(game.getHole(col));
+        if(col < game.getCourse().getHoles().size()) {
+            return HoleFragment.newInstance(game.getCourse().getHole(col));
         } else {
             SubmitFragment submitFragment = SubmitFragment.newInstance();
             submitFragment.setOnSubmitListener(this);
@@ -42,7 +42,7 @@ public class HoleAdapter extends FragmentGridPagerAdapter implements SubmitFragm
 
     @Override
     public int getColumnCount(int i) {
-        return game.getHoles().size() + 1;
+        return game.getCourse().getHoles().size() + 1;
     }
 
     @Override

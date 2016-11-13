@@ -33,6 +33,7 @@ public class Course implements Parcelable {
     };
 
     public Course(Parcel parcel) {
+        this.name = parcel.readString();
         parcel.readList(holes, Hole.class.getClassLoader());
     }
 
@@ -83,6 +84,7 @@ public class Course implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
         parcel.writeList(holes);
     }
 }

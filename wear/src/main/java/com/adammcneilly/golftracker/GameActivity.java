@@ -99,7 +99,7 @@ public class GameActivity extends WearableActivity implements HoleAdapter.OnGame
                                                         + sendMessageResult.getStatus().getStatusCode());
                                             } else {
                                                 Log.v(LOG_TAG, "Message sent.");
-                                                finish();
+                                                finishAffinity();
                                             }
                                         }
                                     }
