@@ -23,7 +23,7 @@ public class ListenerService extends WearableListenerService {
 
             NotificationCompat.Builder mBuilder =
             new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_golf)
                     .setContentTitle("Game completed!")
                     .setContentText("Your score was: " + game.getScore() + " strokes.")
                     .setLocalOnly(true);
