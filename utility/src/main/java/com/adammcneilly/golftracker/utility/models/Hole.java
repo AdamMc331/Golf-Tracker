@@ -3,6 +3,9 @@ package com.adammcneilly.golftracker.utility.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a Hole played during a Game of golf.
  *
@@ -67,6 +70,10 @@ public class Hole implements Parcelable{
         return number;
     }
 
+    public int getPar() {
+        return par;
+    }
+
     public int getValue() {
         return score - par;
     }
@@ -81,5 +88,15 @@ public class Hole implements Parcelable{
         parcel.writeInt(number);
         parcel.writeInt(par);
         parcel.writeInt(score);
+    }
+
+    public static List<Hole> getTestHoles(int count, int par) {
+        List<Hole> holes = new ArrayList<>();
+
+        for(int i = 1; i <= count; i++) {
+            holes.add(new Hole(i, par));
+        }
+
+        return holes;
     }
 }

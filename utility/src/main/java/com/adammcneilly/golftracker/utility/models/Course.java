@@ -8,17 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a Game of golf.
+ * Represents a course someone can play a game at.
  *
  * Created by adam.mcneilly on 11/12/16.
  */
-public class Game implements Parcelable {
-    private static final String LOG_TAG = Game.class.getSimpleName();
-    private Course course;
 
+public class Course implements Parcelable {
+    private String name;
     /**
-     * List of holes that the user played. Used unbounded list because user might play less than 18,
-     * but we will not allow more.
+     * List of holes for the course.
      */
     private List<Hole> holes = new ArrayList<>();
 
@@ -34,25 +32,25 @@ public class Game implements Parcelable {
         }
     };
 
-    public Game(Parcel parcel) {
+    public Course(Parcel parcel) {
         parcel.readList(holes, null);
     }
 
-    public Game(Course course) {
-        this.course = course;
-        this.holes = new ArrayList<>(course.getHoles().size());
-    }
-
-    public Game(List<Hole> gameHoles) {
-        if(gameHoles.size() > 18) {
+    public Course(String name, List<Hole> courseHoles) {
+        if(courseHoles.size() > 18) {
             throw new IllegalArgumentException("Invalid number of holes.");
         }
 
-        this.holes = gameHoles;
+        this.name = name;
+        this.holes = courseHoles;
     }
 
     public List<Hole> getHoles() {
         return holes;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Hole getHole(int number) {
@@ -63,18 +61,19 @@ public class Game implements Parcelable {
         return holes.get(number);
     }
 
-    public int getScore() {
-        int score = 0;
+    public int getPar() {
+        int par = 0;
 
         for(Hole hole : holes) {
-            score += hole.getScore();
+            par += hole.getPar();
         }
 
-        return score;
+        return par;
     }
 
-    public static Game getPar3Game() {
-        return new Game(Hole.getTestHoles(3, 3));
+    public static Course getTestCourse(String name) {
+        List<Hole> holes = Hole.getTestHoles(3, 3);
+        return new Course(name, holes);
     }
 
     @Override
