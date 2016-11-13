@@ -35,7 +35,8 @@ public class Game implements Parcelable {
     };
 
     public Game(Parcel parcel) {
-        parcel.readList(holes, null);
+        this.course = parcel.readParcelable(Course.class.getClassLoader());
+        parcel.readList(holes, Hole.class.getClassLoader());
     }
 
     public Game(Course course) {
@@ -84,6 +85,7 @@ public class Game implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeParcelable(course, 0);
         parcel.writeList(holes);
     }
 }

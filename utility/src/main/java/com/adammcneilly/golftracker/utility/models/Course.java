@@ -20,20 +20,20 @@ public class Course implements Parcelable {
      */
     private List<Hole> holes = new ArrayList<>();
 
-    public static Creator<Game> CREATOR = new Creator<Game>() {
+    public static Creator<Course> CREATOR = new Creator<Course>() {
         @Override
-        public Game createFromParcel(Parcel parcel) {
-            return new Game(parcel);
+        public Course createFromParcel(Parcel parcel) {
+            return new Course(parcel);
         }
 
         @Override
-        public Game[] newArray(int i) {
-            return new Game[i];
+        public Course[] newArray(int i) {
+            return new Course[i];
         }
     };
 
     public Course(Parcel parcel) {
-        parcel.readList(holes, null);
+        parcel.readList(holes, Hole.class.getClassLoader());
     }
 
     public Course(String name, List<Hole> courseHoles) {

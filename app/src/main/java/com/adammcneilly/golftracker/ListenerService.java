@@ -2,6 +2,7 @@ package com.adammcneilly.golftracker;
 
 import android.app.NotificationManager;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.adammcneilly.golftracker.utility.models.Game;
 import com.google.android.gms.wearable.MessageEvent;
@@ -19,6 +20,8 @@ public class ListenerService extends WearableListenerService {
     public void onMessageReceived(MessageEvent messageEvent) {
         if(messageEvent.getPath().equals("/game")) {
             String gameJson = new String(messageEvent.getData());
+            Log.v("ListenerService", gameJson);
+
             Game game = new Gson().fromJson(gameJson, Game.class);
 
             NotificationCompat.Builder mBuilder =

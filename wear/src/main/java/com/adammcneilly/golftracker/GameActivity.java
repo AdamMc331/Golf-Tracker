@@ -6,6 +6,7 @@ import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.GridViewPager;
 import android.util.Log;
 
+import com.adammcneilly.golftracker.utility.models.Course;
 import com.adammcneilly.golftracker.utility.models.Game;
 import com.adammcneilly.golftracker.utility.models.Hole;
 import com.adammcneilly.golftracker.adapters.HoleAdapter;
@@ -18,10 +19,12 @@ import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 import com.google.gson.Gson;
 
-public class MainActivity extends WearableActivity implements HoleAdapter.OnGameCompletedListener{
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+public class GameActivity extends WearableActivity implements HoleAdapter.OnGameCompletedListener{
+    private static final String LOG_TAG = GameActivity.class.getSimpleName();
 
     private GoogleApiClient googleApiClient;
+
+    public static final String ARG_COURSE = "courseArg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +53,11 @@ public class MainActivity extends WearableActivity implements HoleAdapter.OnGame
                 .addApi(Wearable.API)
                 .build();
 
+        Course course = getIntent().getParcelableExtra(ARG_COURSE);
+        Game game = new Game(course);
+
         GridViewPager gridViewPager = (GridViewPager) findViewById(R.id.view_pager);
-        HoleAdapter holeAdapter = new HoleAdapter(getFragmentManager(), Game.getPar3Game());
+        HoleAdapter holeAdapter = new HoleAdapter(getFragmentManager(), game);
         holeAdapter.setOnGameCompletedListener(this);
         gridViewPager.setAdapter(holeAdapter);
     }
